@@ -31,10 +31,6 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/javascripts/webrtc.js', function(req, res) {
-  res.type('js');
-  res.render('javascripts/webrtc', {address: app.get('ip') + ':' + app.get('port')});
-});
 
 server = http.createServer(app);
 server.listen(app.get('port'), function(){
@@ -43,12 +39,14 @@ server.listen(app.get('port'), function(){
 
 // WebSocket
 var sio = socketio.listen(server);
+var users = {};
 
 sio.sockets.on("connection", function(socket) {
   socket.emit('connected', {message: 'hello!'});
 
-  socket.on("join", function(data) {
-    sio.sockets.emit("joined", {message: 'joined!'});
+  socket.on("join", function(user) {
+    users[user.name] = user.name;    
+    sio.sockets.emit("joined", users);
   });
 
   socket.on("quit", function(data) {

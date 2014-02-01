@@ -1,17 +1,22 @@
 $(function() {
   var socket = io.connect('/');
 
-  $(document).on('click', '#user-join', function() {
-    socket.emit('join', {value: 'join'});
+  $(document).on('submit', '#join-form', function() {
+    $userName = $('#user-name')
+    socket.emit('join', {name: $userName.val()});
+    event.preventDefault();
   });
   
   socket.on('connected', function(data) {
-    alert(data.message);
+    //alert(data);
   });
   
-  socket.on('joined', function(data) {
-    alert(data.message);
-  })
+  socket.on('joined', function(users) {
+    userList = $('#users ul').empty();
+    for (var user in users) {
+      userList.append("<li>" + user + "</li>");
+    }
+  });
 
   var peer = new webkitRTCPeerConnection({
     "iceServers": [{"url": "stun:stun.l.google.com:19302"}]
