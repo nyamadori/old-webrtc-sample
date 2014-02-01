@@ -4,7 +4,7 @@ $(function() {
   $(document).on('submit', '#join-form', function() {
     $userName = $('#user-name')
     socket.emit('join', {name: $userName.val()});
-    event.preventDefault();
+    return false;
   });
   
   socket.on('connected', function(data) {
