@@ -1,1 +1,1 @@
-web: node node_sample.js
+web: node app

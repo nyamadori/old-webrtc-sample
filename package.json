@@ -1,16 +1,13 @@
 {
-  "name": "node_sample",
+  "name": "application-name",
   "version": "0.0.1",
-  "description": "node.js のサンプルというか練習というか",
-  "main": "node_sample.js",
-  "dependencies": {
-    "ejs": "~0.8.5",
-    "express": "*"
-  },
-  "devDependencies": {},
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "express": "3.4.8",
+    "ejs": "*",
+    "socket.io": "*"
+  }
 }
