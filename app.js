@@ -21,7 +21,7 @@ for (k in interfaces) {
         }
     }
 }
-
+console.log(interfaces);
 var app = express();
 
 // all environments
