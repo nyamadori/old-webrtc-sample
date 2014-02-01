@@ -9,23 +9,10 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var socketio = require('socket.io');
-var os = require('os')
 
-var interfaces = os.networkInterfaces();
-var addresses = [];
-for (k in interfaces) {
-    for (k2 in interfaces[k]) {
-        var address = interfaces[k][k2];
-        if (address.family == 'IPv4' && !address.internal) {
-            addresses.push(address.address);
-        }
-    }
-}
-console.log(interfaces);
 var app = express();
 
 // all environments
-app.set('ip', addresses[0] || 'localhost')
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
