@@ -1,4 +1,15 @@
 {
   "name": "node_sample",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "description": "node.js のサンプルというか練習というか",
+  "main": "node_sample.js",
+  "dependencies": {
+    "ejs": "~0.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
