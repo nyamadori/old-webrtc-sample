@@ -13,6 +13,7 @@ var socketio = require('socket.io');
 var app = express();
 
 // all environments
+app.set('ip', process.env.PORT || 'localhost')
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -31,10 +32,14 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/javascripts/webrtc.js', function(req, res) {
+  res.type('js');
+  res.render('javascripts/webrtc', {address: app.get('ip') + ':' + app.get('port')});
+});
 
 server = http.createServer(app);
 server.listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ');
 });
 
 // WebSocket

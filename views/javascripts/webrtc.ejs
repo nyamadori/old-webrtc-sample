@@ -1,5 +1,5 @@
 $(function() {
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('http://<%= address %>');
 
   $(document).on('click', '#user-join', function() {
     socket.emit('join', {value: 'join'});
@@ -16,7 +16,7 @@ $(function() {
   var peer = new webkitRTCPeerConnection({
     "iceServers": [{"url": "stun:stun.l.google.com:19302"}]
   });
- 
+  
   navigator.webkitGetUserMedia(
     {video: true, audio: false}, 
     function(stream) {
@@ -27,8 +27,5 @@ $(function() {
     function(error) {
       console.log(error.name + ": " + error.message)
     });
-  
-  
-
 
 });
