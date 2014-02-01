@@ -48,7 +48,7 @@ sio.sockets.on("connection", function(socket) {
   socket.emit('connected', {message: 'hello!'});
 
   socket.on("join", function(data) {
-    socket.emit("joined", {message: 'joined!'});
+    sio.sockets.emit("joined", {message: 'joined!'});
   });
 
   socket.on("quit", function(data) {
