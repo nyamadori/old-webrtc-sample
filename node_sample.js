@@ -1,17 +1,17 @@
 var http = require('http');
 var fs   = require('fs');
+var ejs  = require('ejs');
+var util = require('util');
 
-var server = http.createServer();
+var hello = fs.readFileSync('./hello.ejs', 'utf-8');
 
-server.on('request', doRequest);
-server.listen(process.env.PORT, process.env.IP);
-console.log('Server running!');
+var server = http.createServer(function(req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  template_params = {time_now: new Date().toString()}
+  res.write(ejs.render(hello, template_params));
+  res.end();
+}).listen(process.env.PORT, process.env.IP);
+
+addr = server.address();
+console.log('Server running at ' + addr.address + ':' + addr.port);
  
-// リクエストの処理
-function doRequest(req, res) {
-  fs.readFile("./hello.html", 'UTF-8', function(err, data) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    res.end();
-  })
-}
