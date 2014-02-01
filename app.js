@@ -13,7 +13,7 @@ var socketio = require('socket.io');
 var app = express();
 
 // all environments
-app.set('ip', process.env.PORT || 'localhost')
+app.set('ip', process.env.IP || 'localhost')
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
