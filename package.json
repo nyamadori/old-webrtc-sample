@@ -4,7 +4,8 @@
   "description": "node.js のサンプルというか練習というか",
   "main": "node_sample.js",
   "dependencies": {
-    "ejs": "~0.8.5"
+    "ejs": "~0.8.5",
+    "express": "*"
   },
   "devDependencies": {},
   "scripts": {
