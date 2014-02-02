@@ -65,7 +65,7 @@ $(function() {
     $("#user-id").html(data.user.id);
 
     navigator.getUserMedia(
-      { audio: false, video: true },
+      { audio: true, video: true },
       function(stream) {
         // srcにBlob URLを指定するとカメラの画像がストリームで流れる
         $localVideo.attr('src', window.URL.createObjectURL(stream));
