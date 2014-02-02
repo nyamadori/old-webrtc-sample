@@ -11,21 +11,15 @@
   <body>
     <header>
       <h1><%= title %></h1>
-      <p>ようこそ <%= title %> へ</p>
+      <p>Welcome to <%= title %>!</p>
+      <p>Your ID: <span id="user-id"></span></p>
+      <form id="call-form">
+        <label for="callee">Callee ID: </label>
+        <input type="text" id="callee">
+        <input type="submit" id="call" value="Call">
+      </form>
     </header>
     <video id="local" autoplay></video>
     <video id="remote" autoplay></video>
-
-    <article id="users">
-      <h1>参加者</h1>
-      <ul>
-        
-      </ul>
-
-      <form id="join-form">
-        <input type="text" id="user-name">
-        <input type="submit" id="user-join" value="参加する">
-      </form>
-    </section>
   </body>
 </html>

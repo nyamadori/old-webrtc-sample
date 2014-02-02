@@ -41,15 +41,21 @@ server.listen(app.get('port'), function(){
 var sio = socketio.listen(server);
 var users = {};
 
-sio.sockets.on("connection", function(socket) {
-  socket.emit('connected', {message: 'hello!'});
-
-  socket.on("join", function(user) {
-    users[user.name] = user.name;    
-    sio.sockets.emit("joined", users);
+sio.sockets.on("connection", function(client) {
+  client.emit('connected', {user: {id: client.id}});
+  users[client.id] = null;
+  
+  // クライアントからの offer を送る
+  client.on('offer', function(data) {
+    users[this.id] = {from: this.id, to: data.to}
+    sio.sockets.socket(data.to).emit('offer', {sdp: data.sdp, from: this.id});
   });
 
-  socket.on("quit", function(data) {
-    
+  client.on('answer', function(data) {
+    sio.sockets.socket(data.to).emit('answer', {sdp: data.sdp, from: this.id});
+  });
+
+  client.on('candidate', function(data) {
+    sio.sockets.emit('candidate', {candidate: data.candidate});
   });
 });
